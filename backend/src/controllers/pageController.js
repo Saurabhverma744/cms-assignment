@@ -99,9 +99,34 @@ const updatePage = async (req, res) => {
   }
 };
 
+// Delete Page
+const deletePage = async (req, res) => {
+  try {
+    const page = await Page.findByIdAndDelete(req.params.id);
+
+    if (!page) {
+      return res.status(404).json({
+        success: false,
+        message: "Page not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Page deleted successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   createPage,
   getAllPages,
   getPageById,
   updatePage,
+  deletePage,
 };
