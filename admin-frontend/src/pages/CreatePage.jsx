@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createPage } from "../services/pageService";
+import "../styles/form.css";
 
 function CreatePage() {
   const navigate = useNavigate();
@@ -19,19 +20,39 @@ function CreatePage() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      await createPage(page);
-      alert("Page Created Successfully");
-      navigate("/dashboard");
-    } catch (error) {
-      alert(error.response?.data?.message || "Failed to create page");
-    }
-  };
+  if (!title.trim()) {
+    alert("Title is required.");
+    return;
+  }
+
+  if (!slug.trim()) {
+    alert("Slug is required.");
+    return;
+  }
+
+  if (!content.trim()) {
+    alert("Content is required.");
+    return;
+  }
+
+  try {
+    await createPage({
+      title,
+      slug,
+      content,
+    });
+
+    navigate("/dashboard");
+  } catch (error) {
+    alert("Failed to create page");
+  }
+};
 
   return (
-    <div style={{ padding: "30px" }}>
+    
+    <div  className="form-container">
       <h1>Create Page</h1>
 
       <form onSubmit={handleSubmit}>

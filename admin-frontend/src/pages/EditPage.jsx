@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getPageById, updatePage } from "../services/pageService";
+import "../styles/form.css";
 
 function EditPage() {
   const { id } = useParams();
@@ -38,19 +39,38 @@ function EditPage() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      await updatePage(id, page);
-      alert("Page Updated Successfully");
-      navigate("/dashboard");
-    } catch (error) {
-      alert(error.response?.data?.message || "Update Failed");
-    }
-  };
+  if (!title.trim()) {
+    alert("Title is required.");
+    return;
+  }
+
+  if (!slug.trim()) {
+    alert("Slug is required.");
+    return;
+  }
+
+  if (!content.trim()) {
+    alert("Content is required.");
+    return;
+  }
+
+  try {
+    await createPage({
+      title,
+      slug,
+      content,
+    });
+
+    navigate("/dashboard");
+  } catch (error) {
+    alert("Failed to create page");
+  }
+};
 
   return (
-    <div style={{ padding: "30px" }}>
+    <div className="form-container">
       <h1>Edit Page</h1>
 
       <form onSubmit={handleSubmit}>

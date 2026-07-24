@@ -1,0 +1,54 @@
+.home-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.hero {
+    background: #2563eb;
+    color: white;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.hero h1 {
+    margin: 0;
+    font-size: 38px;
+}
+
+.hero p {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.page-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.page-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: black;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .1);
+    transition: transform .2s;
+}
+
+.page-card:hover {
+    transform: translateY(-5px);
+}
+
+.page-card h3 {
+    margin-top: 0;
+    color: #2563eb;
+}
+
+.page-card p {
+    color: #555;
+}
