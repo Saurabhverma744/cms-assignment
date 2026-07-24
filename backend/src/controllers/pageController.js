@@ -18,6 +18,13 @@ const createPage = async (req, res) => {
       data: page,
     });
   } catch (error) {
+    if (error.code === 11000) {
+      return res.status(400).json({
+        success: false,
+        message: "Slug already exists. Please choose another slug.",
+      });
+    }
+
     res.status(500).json({
       success: false,
       message: error.message,
