@@ -8,10 +8,12 @@ const {
   getPageById,
   updatePage,
   deletePage,
+  getPageBySlug,
 } = require("../controllers/pageController");
 
 router.post("/", protect, createPage);
 router.get("/", getAllPages);
+router.get("/slug/:slug", getPageBySlug);
 router.get("/:id", getPageById);
 router.put("/:id", protect, updatePage);
 router.delete("/:id", protect, deletePage);

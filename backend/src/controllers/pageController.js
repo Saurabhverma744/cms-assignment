@@ -130,10 +130,34 @@ const deletePage = async (req, res) => {
   }
 };
 
+const getPageBySlug = async (req, res) => {
+  try {
+    const page = await Page.findOne({ slug: req.params.slug });
+
+    if (!page) {
+      return res.status(404).json({
+        success: false,
+        message: "Page not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: page,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   createPage,
   getAllPages,
   getPageById,
   updatePage,
   deletePage,
+  getPageBySlug,
 };
